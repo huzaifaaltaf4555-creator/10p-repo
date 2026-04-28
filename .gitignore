@@ -1,0 +1,53 @@
+# ---- OS ----
+.DS_Store
+Thumbs.db
+
+# ---- IDEs / Editors ----
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.njsproj
+*.sln
+*.sw?
+.vs/
+
+# ---- Logs ----
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ---- Node / Frontend ----
+**/node_modules/
+**/dist/
+**/dist-ssr/
+**/.vite/
+**/*.local
+
+# ---- .NET / Build ----
+**/bin/
+**/obj/
+**/TestResults/
+**/coverage/
+**/*.pdb
+**/*.cache
+
+# ---- Publish / Artifacts ----
+**/publish/
+**/out/
+
+# ---- Env files ----
+.env
+.env.*
+
+# ---- Database (Local) ----
+*.mdf
+*.ldf
+*.sqlite
+*.db
