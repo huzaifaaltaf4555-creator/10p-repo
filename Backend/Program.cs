@@ -117,6 +117,7 @@ try
         {
             policy.WithOrigins(
                     "http://localhost:5173",   // Vite dev server
+                    "http://localhost:5174",   // Alternate Vite dev server
                     "http://localhost:3000"     // Alternative port
                 )
                 .AllowAnyHeader()
