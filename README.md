@@ -66,41 +66,61 @@ A full-stack production-ready Task Management System built with **ASP.NET Core 8
 
 ---
 
-## Quick Start
+## Manager Setup & Quick Start Guide
 
-### Prerequisites
-- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
-- [Node.js 18+](https://nodejs.org/)
-- SQL Server LocalDB (included with Visual Studio)
+This guide provides step-by-step instructions on how to set up the project locally from scratch.
 
-### 1. Clone and checkout
+### 1. Prerequisites (What to Download)
+Before starting, ensure the following tools are installed on your machine:
+- **[.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)**: Required to build and run the backend.
+- **[Node.js (v18 or higher)](https://nodejs.org/)**: Required to run the React frontend.
+- **[Visual Studio Code (VS Code)](https://code.visualstudio.com/)**: Recommended IDE for viewing the code.
+- **[SQL Server Management Studio (SSMS)](https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms)**: Required to view and manage the local database.
+- **SQL Server LocalDB**: This usually comes pre-installed with Visual Studio. If you only have VS Code, you can install [SQL Server Express](https://www.microsoft.com/en-us/sql-server/sql-server-downloads).
+
+### 2. Clone the Repository
+Open a terminal (or Git Bash) and run:
 ```bash
 git clone <repo-url>
 cd 10p-repo
 git checkout V2
 ```
 
-### 2. Start the Backend
-```bash
-cd Backend
-dotnet run
-```
+### 3. Database Setup
+The application uses Entity Framework Core with SQL Server LocalDB.
+- **Server Name:** `(localdb)\mssqllocaldb`
+- **Database Name:** `TaskManagerDb`
+- **Authentication:** `Windows Authentication`
 
-The API will start at **http://localhost:5000** and Swagger UI at http://localhost:5000/swagger.
+You do **not** need to manually create the database. The backend is configured to automatically create the database and seed it with default users and tasks the first time you run it!
 
-On first run, the database is automatically:
-- Created via EF Core migrations
-- Seeded with roles (Admin, User)
-- Seeded with default users and sample tasks
+### 4. Start the Backend API
+1. Open a new terminal in VS Code.
+2. Navigate to the Backend folder:
+   ```bash
+   cd Backend
+   ```
+3. Run the application:
+   ```bash
+   dotnet run
+   ```
+The backend will start at **http://localhost:5000**. You can view the API documentation by navigating to **http://localhost:5000/swagger** in your browser.
 
-### 3. Start the Frontend
-```bash
-cd Frontend
-npm install
-npm run dev
-```
-
-The frontend will start at **http://localhost:5173**.
+### 5. Start the Frontend Application
+1. Open a *second* terminal window in VS Code (keep the backend running).
+2. Navigate to the Frontend folder:
+   ```bash
+   cd Frontend
+   ```
+3. Install the required Node dependencies:
+   ```bash
+   npm install
+   ```
+4. Start the Vite development server:
+   ```bash
+   npm run dev
+   ```
+The frontend will start at **http://localhost:5173** (or 5174 if 5173 is busy). Open this link in your browser to access the application.
 
 ---
 
