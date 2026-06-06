@@ -1,26 +1,22 @@
-import { apiRequest, shouldUseMock } from './apiClient'
-import { mockUser } from '../data/mockData'
+import apiClient from './apiClient'
 
-export const login = async () => {
-  if (shouldUseMock()) {
-    return { token: 'mock-token', user: mockUser }
-  }
-
-  return apiRequest('/auth/login', { method: 'POST' })
+/**
+ * Login — sends credentials, returns auth response with JWT token.
+ */
+export const login = async (email, password) => {
+  const response = await apiClient.post('/auth/login', { email, password })
+  return response.data // { success, message, data: { token, userId, fullName, email, role } }
 }
 
-export const register = async () => {
-  if (shouldUseMock()) {
-    return { token: 'mock-token', user: mockUser }
-  }
-
-  return apiRequest('/auth/register', { method: 'POST' })
-}
-
-export const logout = async () => {
-  if (shouldUseMock()) {
-    return true
-  }
-
-  return apiRequest('/auth/logout', { method: 'POST' })
+/**
+ * Register — creates a new account, returns auth response with JWT token.
+ */
+export const register = async (fullName, email, password, role = 'User') => {
+  const response = await apiClient.post('/auth/register', {
+    fullName,
+    email,
+    password,
+    role,
+  })
+  return response.data
 }

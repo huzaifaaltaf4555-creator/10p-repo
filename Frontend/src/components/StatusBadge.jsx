@@ -1,7 +1,13 @@
 const statusStyles = {
   Completed: 'border-emerald-200 text-emerald-700',
-  'In progress': 'border-blue-200 text-blue-700',
+  InProgress: 'border-blue-200 text-blue-700',
   Pending: 'border-amber-200 text-amber-700',
+}
+
+const statusLabels = {
+  Completed: 'Completed',
+  InProgress: 'In progress',
+  Pending: 'Pending',
 }
 
 function StatusBadge({ status }) {
@@ -11,7 +17,7 @@ function StatusBadge({ status }) {
         statusStyles[status] || 'border-slate-200 text-slate-600'
       }`}
     >
-      {status}
+      {statusLabels[status] || status}
     </span>
   )
 }

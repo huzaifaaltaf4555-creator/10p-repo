@@ -1,42 +1,57 @@
-import { apiRequest, shouldUseMock } from './apiClient'
-import { mockTasks, mockStats } from '../data/mockData'
+import apiClient from './apiClient'
 
+/**
+ * Get task statistics (completed, inProgress, pending counts).
+ */
 export const getTaskStats = async () => {
-  if (shouldUseMock()) {
-    return mockStats
-  }
-
-  return apiRequest('/tasks/stats')
+  const response = await apiClient.get('/tasks/stats')
+  return response.data
 }
 
-export const getTasks = async () => {
-  if (shouldUseMock()) {
-    return mockTasks
-  }
-
-  return apiRequest('/tasks')
+/**
+ * Get tasks with optional search, filter, and pagination.
+ */
+export const getTasks = async (params = {}) => {
+  const response = await apiClient.get('/tasks', { params })
+  return response.data
 }
 
+/**
+ * Get current user's tasks only.
+ */
+export const getMyTasks = async (params = {}) => {
+  const response = await apiClient.get('/tasks/my', { params })
+  return response.data
+}
+
+/**
+ * Get a single task by ID.
+ */
 export const getTaskById = async (taskId) => {
-  if (shouldUseMock()) {
-    return mockTasks.find((task) => task.id === taskId)
-  }
-
-  return apiRequest(`/tasks/${taskId}`)
+  const response = await apiClient.get(`/tasks/${taskId}`)
+  return response.data
 }
 
-export const createTask = async () => {
-  if (shouldUseMock()) {
-    return { success: true }
-  }
-
-  return apiRequest('/tasks', { method: 'POST' })
+/**
+ * Create a new task.
+ */
+export const createTask = async (taskData) => {
+  const response = await apiClient.post('/tasks', taskData)
+  return response.data
 }
 
-export const updateTask = async (taskId) => {
-  if (shouldUseMock()) {
-    return { success: true, id: taskId }
-  }
+/**
+ * Update an existing task.
+ */
+export const updateTask = async (taskId, taskData) => {
+  const response = await apiClient.put(`/tasks/${taskId}`, taskData)
+  return response.data
+}
 
-  return apiRequest(`/tasks/${taskId}`, { method: 'PUT' })
+/**
+ * Delete a task by ID.
+ */
+export const deleteTask = async (taskId) => {
+  const response = await apiClient.delete(`/tasks/${taskId}`)
+  return response.data
 }

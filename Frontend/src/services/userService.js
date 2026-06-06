@@ -1,10 +1,9 @@
-import { apiRequest, shouldUseMock } from './apiClient'
-import { mockUser } from '../data/mockData'
+import apiClient from './apiClient'
 
+/**
+ * Get the current logged-in user's profile.
+ */
 export const getProfile = async () => {
-  if (shouldUseMock()) {
-    return mockUser
-  }
-
-  return apiRequest('/users/me')
+  const response = await apiClient.get('/users/me')
+  return response.data
 }

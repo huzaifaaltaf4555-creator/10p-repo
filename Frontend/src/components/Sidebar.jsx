@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
-const links = [
+const baseLinks = [
   { to: '/dashboard', label: 'Dashboard' },
   { to: '/tasks', label: 'Task List' },
   { to: '/tasks/new', label: 'New Task' },
@@ -8,6 +9,13 @@ const links = [
 ]
 
 function Sidebar() {
+  const { user, isAdmin } = useAuth()
+
+  // Add admin link if user is admin
+  const links = isAdmin
+    ? [...baseLinks.slice(0, 1), { to: '/admin', label: 'Admin Panel' }, ...baseLinks.slice(1)]
+    : baseLinks
+
   return (
     <aside className="hidden w-60 flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm md:flex">
       <div>
@@ -34,8 +42,8 @@ function Sidebar() {
         ))}
       </nav>
       <div className="mt-auto rounded-lg border border-slate-200 bg-slate-50 p-3 text-xs text-slate-600">
-        <p className="font-semibold text-slate-700">Role</p>
-        <p className="mt-1">Admin access enabled</p>
+        <p className="font-semibold text-slate-700">{user?.fullName || 'User'}</p>
+        <p className="mt-1">{user?.role || 'User'} access</p>
       </div>
     </aside>
   )
